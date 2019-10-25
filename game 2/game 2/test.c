@@ -4,17 +4,33 @@
 
 void Game()
 {
-	char mine[ROWS][COLS] = {0};//雷的排布
-	char show[ROWS][COLS] = {0};//排查
+	char mine[ROWS][COLS] = { 0 };//雷的排布
+	char show[ROWS][COLS] = { 0 };//排查
 	//初始化
-	VoidBoard(mine, ROWS, COLS,'0');
-	VoidBoard(show, ROWS, COLS,'*'); 
-	
+	VoidBoard(mine, ROWS, COLS, '0');
+	VoidBoard(show, ROWS, COLS, '*');
+
 	Display(show, ROW, COL);
 	//布置雷
 	BuildMine(mine, ROW, COL);
-	Display(mine, ROW, COL);
-	FindMine(mine, show,ROW, COL);
+	Display(mine, ROW, COL);//打印雷盘
+	int tmp = FindMine(mine, show, ROW, COL);
+	while (1)//循环
+	{
+		if (tmp == 0)//若返回0则胜利
+		{
+			Display(show, ROW, COL);
+			printf("恭喜恭喜，阁下赢了！！！\n");
+			break;
+		}
+		if (tmp == 1)//若返回1则失败
+		{
+			Dispaly(mine, ROW, COL);
+			printf("不恭喜你，因为你输了！！！\n");
+			break;
+		}
+		Display(show, ROW, COL);
+	}
 }
 
 void Menu()
